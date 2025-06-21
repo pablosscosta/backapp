@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Resultado do Backup{% endblock %}
+
+{% block content %}
+    <h1>Resultado do Backup</h1>
+
+    <ul>
+        {% for log in logs %}
+            <li class="{% if 'erro' in log|lower or 'falha' in log|lower %}log-error{% else %}log-success{% endif %}">
+                {{ log }}
+            </li>
+        {% empty %}
+            <li>Nenhuma mensagem gerada.</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'index' %}">⟵ Voltar</a>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Iniciar Backup{% endblock %}
+
+{% block content %}
+    <h1>Backup de Máquina</h1>
+
+    <form method="post" action="{% url 'executar_backup' %}">
+        {% csrf_token %}
+        <label for="machine_name">Nome da máquina de origem:</label>
+        <input type="text" id="machine_name" name="machine_name" required>
+
+        <button type="submit">Iniciar Backup</button>
+    </form>
+
+    <div class="info">
+        💡 Informe o nome da máquina como aparece na rede.<br>
+        Exemplo: <strong>CLIPED-REL-07</strong>
+    </div>
+
+    {% if error %}
+        <div class="message error">{{ error }}</div>
+    {% endif %}
+
+    {% if success %}
+        <div class="message success">Backup iniciado para a máquina <strong>{{ machine_name }}</strong>!</div>
+    {% endif %}
+{% endblock %}
